@@ -12,8 +12,6 @@ public class App {
     int result = app.add(2, 3);
     System.out.println("2 + 3 = " + result);
 
-    System.out.print("Hello world");
-
     System.out.println("Application executed successfully!");
   }
 }
