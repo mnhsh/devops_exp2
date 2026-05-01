@@ -1,0 +1,16 @@
+---
+- name: Deploy Maven Artifact
+  hosts: webserver
+  become: yes
+  tasks:
+    - name: Copy .war file to Tomcat
+      copy:
+        src: ../target/my-app-1.0.war # Ensure this matches your actual .war filename[cite: 1]
+        dest: /opt/tomcat/webapps/root.war
+        owner: tomcat
+        group: tomcat
+        mode: "0644"
+    - name: Restart Tomcat service
+      service:
+        name: tomcat
+        state: restarted
