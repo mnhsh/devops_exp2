@@ -1,7 +1,7 @@
 ---
 - name: Deploy Maven Artifact
   hosts: webserver
-  become: yes
+  become: no
   tasks:
     - name: Copy .war file to Tomcat
       copy:
