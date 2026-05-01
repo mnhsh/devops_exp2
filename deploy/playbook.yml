@@ -3,14 +3,16 @@
   hosts: webserver
   become: no
   tasks:
-    - name: Copy .war file to Tomcat
+    - name: Copy JAR file to Home Directory
       copy:
-        src: ../target/myapp-1.0-SNAPSHOT.jar # Ensure this matches your actual .war filename[cite: 1]
-        dest: /opt/tomcat/webapps/root.war
-        owner: tomcat
-        group: tomcat
+        src: ../target/myapp-1.0-SNAPSHOT.jar
+        dest: /home/dih/myapp.jar
         mode: "0644"
-    - name: Restart Tomcat service
-      service:
-        name: tomcat
-        state: restarted
+
+    - name: Verify file upload
+      shell: ls -l /home/dih/myapp.jar
+      register: file_check
+
+    - name: Print verification
+      debug:
+        msg: "The artifact has been successfully deployed to {{ file_check.stdout }}"
